@@ -1,0 +1,386 @@
+<title>Xavage 26'</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;background:var(--canvas);scroll-behavior:smooth}
+  body{background:var(--canvas);color:var(--ink-soft);font-family:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{color:var(--ink)}
+  ::selection{background:rgba(var(--glow-rgb),.35);color:#fff}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  summary::-webkit-details-marker{display:none}
+  @keyframes xdrift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(5vw,3vw,0) scale(1.16)}}
+  @keyframes xbreathe{from{opacity:.6}to{opacity:.9}}
+  @keyframes xnudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  @keyframes xmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+  @media(max-width:900px){
+    [data-navlinks]{display:none!important}
+    [data-navcta] a{padding:8px 12px!important;font-size:12px!important}
+    [data-split]{grid-template-columns:1fr!important;gap:14px!important}
+    [data-num]{grid-template-columns:1fr!important;gap:20px!important}
+    [data-num] [data-par]{text-align:left!important;transform:none!important}
+    [data-jump]{grid-template-columns:1fr!important}
+    [data-foot]{grid-template-columns:1fr 1fr!important}
+  }
+  @media(max-width:620px){
+    [data-facts]{grid-template-columns:1fr!important}
+    [data-slot]{grid-template-columns:1fr!important;gap:2px!important}
+  }
+
+  :root{
+    --canvas:#07060E;--canvas-rgb:7,6,14;--canvas-deep:#040309;
+    --surface:#0F0D1A;--surface-rgb:15,13,26;--surface-alt:#161327;--surface-alt-rgb:22,19,39;
+    --ink:#F4F2F9;--ink-soft:#D7D3E3;--muted:#8A85A0;--line-rgb:150,130,255;
+    --accent:#E79BFF;--accent-deep:#C74DF2;--glow-rgb:199,77,242;
+    --blue:#3D9BFF;--blue-rgb:61,155,255;--blue-soft:#96CCFF;--blue-deep:#2B4BD8;--blue-deep-rgb:43,75,216;
+    --up:#4FD69C;--up-rgb:79,214,156;--up-soft:#9DE8C4;
+    --down:#F2607A;--down-rgb:242,96,122;--down-soft:#F2A0B2;
+    --gold:#F6DC9C;--gold-rgb:232,184,75;
+  }
+  [data-theme="bull"]{
+    --canvas:#f8fafc;--canvas-rgb:248,250,252;--canvas-deep:#eef2f7;
+    --surface:#ffffff;--surface-rgb:255,255,255;--surface-alt:#eef2f7;--surface-alt-rgb:238,242,247;
+    --ink:#0f172a;--ink-soft:#334155;--muted:#64748b;--line-rgb:15,23,42;
+    --accent:#059669;--accent-deep:#10b981;--glow-rgb:16,185,129;
+    --blue:#0284c7;--blue-rgb:2,132,199;--blue-soft:#0369a1;--blue-deep:#10b981;--blue-deep-rgb:16,185,129;
+    --up:#059669;--up-rgb:5,150,105;--up-soft:#047857;
+    --down:#dc2626;--down-rgb:220,38,38;--down-soft:#b91c1c;
+    --gold:#b45309;--gold-rgb:180,83,9;
+  }
+  [data-theme="bear"]{
+    --canvas:#0b0f19;--canvas-rgb:11,15,25;--canvas-deep:#070a11;
+    --surface:#131926;--surface-rgb:19,25,38;--surface-alt:#1a2231;--surface-alt-rgb:26,34,49;
+    --ink:#f1f5f9;--ink-soft:#cbd5e1;--muted:#8b97a8;--line-rgb:239,68,68;
+    --accent:#ef4444;--accent-deep:#dc2626;--glow-rgb:220,38,38;
+    --blue:#f87171;--blue-rgb:248,113,113;--blue-soft:#fca5a5;--blue-deep:#991b1b;--blue-deep-rgb:153,27,27;
+    --up:#4ade80;--up-rgb:74,222,128;--up-soft:#86efac;
+    --down:#ef4444;--down-rgb:239,68,68;--down-soft:#fca5a5;
+    --gold:#f59e0b;--gold-rgb:245,158,11;
+  }
+  body,body *{transition:border-color .3s ease,box-shadow .3s ease,fill .3s ease,stroke .3s ease}
+  [data-theme="bull"] [data-rays]{display:none}
+  [data-theme="bull"] [data-herobanner] img{filter:grayscale(1) sepia(1) hue-rotate(96deg) saturate(2.6) brightness(.95)}
+  [data-theme="bear"] [data-herobanner] img{filter:grayscale(1) sepia(1) hue-rotate(-25deg) saturate(3.2) brightness(.92)}
+  [data-theme="bull"] [data-grain]{opacity:.05;mix-blend-mode:multiply}
+  [data-theme="bull"] h1,[data-theme="bull"] h2,[data-theme="bull"] b,[data-theme="bull"] a{text-shadow:none!important}
+  [data-words]{transition-property:opacity,transform!important}
+  [data-theme="bull"] [data-words],[data-theme="bull"] [data-words] span{color:#0f172a}
+  [data-theme="bull"] [data-words] em,[data-theme="bull"] [data-words] em span{color:#059669}
+  [data-theme="bear"] [data-words],[data-theme="bear"] [data-words] span{color:#f1f5f9}
+  [data-theme="bear"] [data-words] em,[data-theme="bear"] [data-words] em span{color:#ef4444}
+  [data-theme="bear"] #xBlue stop:nth-child(1){stop-color:#FCA5A5}
+  [data-theme="bear"] #xBlue stop:nth-child(2){stop-color:#EF4444}
+  [data-theme="bear"] #xBlue stop:nth-child(3){stop-color:#7F1D1D}
+  [data-theme="bear"] #xMag stop:nth-child(1){stop-color:#FECACA}
+  [data-theme="bear"] #xMag stop:nth-child(2){stop-color:#DC2626}
+  [data-theme="bear"] #xMag stop:nth-child(3){stop-color:#7F1D1D}
+  [data-theme="bear"] #xViolet stop:nth-child(1){stop-color:#FEE2E2}
+  [data-theme="bear"] #xViolet stop:nth-child(2){stop-color:#F87171}
+  [data-theme="bear"] #xViolet stop:nth-child(3){stop-color:#450A0A}
+  [data-theme="bear"] #xHalo stop:nth-child(1){stop-color:#FCA5A5}
+  [data-theme="bear"] #xHalo stop:nth-child(2){stop-color:#991B1B}
+  [data-theme="bear"] [data-rays] g[filter="url(#xMid)"] path{stroke:#FCA5A5}
+  [data-theme="bear"] [data-rays] g[filter="url(#xLow)"] path{stroke:#FEE2E2}
+</style>
+
+<div style="position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(130% 58% at 50% -10%,rgba(var(--line-rgb),.20),transparent 60%),linear-gradient(180deg,rgba(var(--line-rgb),.08) 0%,rgba(var(--line-rgb),.022) 36%,rgba(0,0,0,0) 64%)"></div>
+<div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+  <span style="position:absolute;top:-16vw;left:-22vw;width:66vw;height:66vw;border-radius:50%;filter:blur(48px);opacity:.55;background:radial-gradient(circle,rgba(var(--blue-deep-rgb),.22),transparent 68%);animation:xdrift 44s cubic-bezier(.16,1,.3,1) infinite alternate"></span>
+  <span style="position:absolute;top:80vw;right:-28vw;width:66vw;height:66vw;border-radius:50%;filter:blur(48px);opacity:.55;background:radial-gradient(circle,rgba(var(--glow-rgb),.13),transparent 68%);animation:xdrift 58s cubic-bezier(.16,1,.3,1) infinite alternate"></span>
+  <span style="position:absolute;bottom:-22vw;left:14vw;width:66vw;height:66vw;border-radius:50%;filter:blur(48px);opacity:.55;background:radial-gradient(circle,rgba(var(--blue-rgb),.09),transparent 66%);animation:xdrift 66s cubic-bezier(.16,1,.3,1) infinite alternate"></span>
+</div>
+<div data-grain style="position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.1;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E&quot;);background-size:220px 220px"></div>
+
+<header style="position:sticky;top:0;z-index:40;background:rgba(var(--canvas-rgb),.74);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border-bottom:1px solid rgba(var(--line-rgb),.15);transform:translateY(0);transition:transform .35s cubic-bezier(.16,1,.3,1);will-change:transform">
+  <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px);display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:20px;flex-wrap:wrap">
+    <a href="#" style="display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);text-shadow:0 0 22px rgba(var(--glow-rgb),.5)">Xavage <em style="font-style:normal;color:var(--accent);text-shadow:0 0 18px rgba(var(--glow-rgb),.6)">26'</em></a>
+    <nav data-navlinks style="display:flex;align-items:center;gap:26px">
+      <a data-nav="home" href="#about" style="font-size:13.5px;color:var(--muted)">About</a>
+      <a data-nav="events" href="Events.html" style="font-size:13.5px;color:var(--muted)">Events</a>
+      <a data-nav="schedule" href="#schedule" style="font-size:13.5px;color:var(--muted)">Schedule</a>
+      <a data-nav="sponsorship" href="OurSponsors.html" style="font-size:13.5px;color:var(--muted)">Our Sponsors</a>
+      <a data-nav="faq" href="#faq" style="font-size:13.5px;color:var(--muted)">FAQ</a>
+    </nav>
+    <div data-navcta style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+      <a href="#register" style="display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;padding:9px 15px;border-radius:5px;border:1px solid var(--accent);background:transparent;color:var(--accent);white-space:nowrap">Register</a>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:-1px;height:1px;overflow:hidden">
+    <i data-prog style="display:block;height:100%;background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--accent-deep));box-shadow:0 0 10px rgba(var(--glow-rgb),.7);transform:scaleX(0);transform-origin:0 50%"></i>
+  </div>
+</header>
+
+<main style="position:relative;z-index:1">
+
+  <section style="position:relative;min-height:100vh;display:grid;align-content:center;padding:clamp(60px,10vh,120px) 0 clamp(80px,12vh,140px);overflow:hidden">
+    <svg data-rays viewBox="0 0 1200 760" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false" style="position:absolute;left:50%;top:-70px;width:min(1500px,150vw);height:calc(100% + 220px);transform:translateX(-50%);transform-origin:50% 12%;z-index:0;pointer-events:none;opacity:.76;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 58%,transparent 94%);mask-image:linear-gradient(180deg,#000 0%,#000 58%,transparent 94%);animation:xbreathe 19s ease-in-out infinite alternate">
+      <defs>
+        <filter id="xBig" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="30"></feGaussianBlur></filter>
+        <filter id="xMid" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="12"></feGaussianBlur></filter>
+        <filter id="xLow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter>
+        <linearGradient id="xBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE2FF" stop-opacity=".95"></stop><stop offset=".42" stop-color="#3D9BFF" stop-opacity=".8"></stop><stop offset="1" stop-color="#2B4BD8" stop-opacity=".26"></stop></linearGradient>
+        <linearGradient id="xMag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2CCFF" stop-opacity=".95"></stop><stop offset=".42" stop-color="#C74DF2" stop-opacity=".8"></stop><stop offset="1" stop-color="#6D28D9" stop-opacity=".26"></stop></linearGradient>
+        <linearGradient id="xViolet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D4FF" stop-opacity=".92"></stop><stop offset=".45" stop-color="#8B5CF6" stop-opacity=".78"></stop><stop offset="1" stop-color="#4C1D95" stop-opacity=".22"></stop></linearGradient>
+        <radialGradient id="xHalo"><stop offset="0" stop-color="#DCC8FF" stop-opacity=".5"></stop><stop offset=".55" stop-color="#6D3AED" stop-opacity=".18"></stop><stop offset="1" stop-color="#2B4BD8" stop-opacity="0"></stop></radialGradient>
+      </defs>
+      <ellipse cx="600" cy="150" rx="310" ry="225" fill="url(#xHalo)" filter="url(#xBig)"></ellipse>
+      <g fill="none" filter="url(#xBig)">
+        <path d="M600 100 C 552 350, 320 530, -180 810" stroke="url(#xBlue)" stroke-width="60"></path>
+        <path d="M600 100 C 572 340, 425 535, 95 810" stroke="url(#xBlue)" stroke-width="52"></path>
+        <path d="M600 100 C 590 340, 515 545, 350 810" stroke="url(#xBlue)" stroke-width="46"></path>
+        <path d="M600 100 C 600 350, 592 560, 552 810" stroke="url(#xViolet)" stroke-width="40"></path>
+        <path d="M600 100 C 608 350, 645 560, 712 810" stroke="url(#xMag)" stroke-width="44"></path>
+        <path d="M600 100 C 624 340, 730 535, 975 810" stroke="url(#xMag)" stroke-width="52"></path>
+        <path d="M600 100 C 648 345, 875 530, 1370 810" stroke="url(#xMag)" stroke-width="58"></path>
+      </g>
+      <g fill="none" filter="url(#xMid)">
+        <path d="M600 108 C 588 345, 512 545, 348 810" stroke="#8FCBFF" stroke-opacity=".5" stroke-width="12"></path>
+        <path d="M600 108 C 600 350, 592 560, 552 810" stroke="#D8C8FF" stroke-opacity=".5" stroke-width="11"></path>
+        <path d="M600 108 C 609 350, 646 560, 714 810" stroke="#EFA8FF" stroke-opacity=".5" stroke-width="12"></path>
+        <path d="M600 108 C 622 342, 726 535, 968 810" stroke="#EFA8FF" stroke-opacity=".38" stroke-width="10"></path>
+      </g>
+      <g fill="none" stroke="#FFFFFF" stroke-opacity=".34" filter="url(#xLow)">
+        <path d="M600 112 C 600 350, 592 560, 552 810" stroke-width="3"></path>
+        <path d="M600 112 C 609 350, 646 560, 714 810" stroke-width="3"></path>
+      </g>
+    </svg>
+
+    <div data-herobanner style="position:absolute;inset:0;z-index:0;pointer-events:none">
+      <div style="position:absolute;inset:0;pointer-events:auto">
+        <img id="home-hero-bull" src="./assets/hero-bull.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(var(--canvas-rgb),.92) 0%,rgba(var(--canvas-rgb),.82) 30%,rgba(var(--canvas-rgb),.5) 52%,rgba(var(--canvas-rgb),.1) 76%,rgba(var(--canvas-rgb),0) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(var(--canvas-rgb),.7) 0%,rgba(var(--canvas-rgb),0) 22%,rgba(var(--canvas-rgb),0) 58%,var(--canvas) 100%)"></div>
+    </div>
+
+    <div data-herocopy style="position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
+      <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;padding:5px 11px;border-radius:9999px;background:rgba(var(--glow-rgb),.15);color:var(--accent)"><i style="width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor"></i>TISB presents</span>
+
+      <h1 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(3rem,9vw,7rem);line-height:1.04;letter-spacing:-.035em;color:var(--ink);margin:26px 0 26px;max-width:13ch;text-shadow:0 0 44px rgba(var(--glow-rgb),.4),0 0 120px rgba(var(--blue-rgb),.24)">Fortune favors <em style="font-style:italic;color:var(--accent)">the bold.</em></h1>
+
+      <p data-rv style="opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.16,1,.3,1) .4s,transform .9s cubic-bezier(.16,1,.3,1) .4s;font-size:clamp(1.03rem,1.7vw,1.24rem);line-height:1.62;color:var(--ink-soft);max-width:46ch">XAVAGE 26' is India's largest student-led business and economics charity fest, hosted at The International School Bangalore. Six events, one campus, and a competition floor built for students who would rather argue a position than memorise one.</p>
+
+      <div data-rv style="opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.16,1,.3,1) .52s,transform .9s cubic-bezier(.16,1,.3,1) .52s;display:flex;flex-wrap:wrap;gap:10px;margin-top:34px">
+        <a href="Events.html" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid var(--ink);background:var(--ink);color:var(--canvas)">See the events
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+        </a>
+      </div>
+      <p data-rv style="opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.16,1,.3,1) .6s,transform .9s cubic-bezier(.16,1,.3,1) .6s;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted)">The International School Bangalore · Dates announced soon</p>
+
+      <div data-facts style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(40px,6vw,64px);max-width:760px">
+        <div data-rv style="opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .1s,transform .8s cubic-bezier(.16,1,.3,1) .1s;border-top:1px solid rgba(var(--line-rgb),.15);padding-top:16px"><b data-count="6" style="display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.03em;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums">6</b><span style="display:block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)">Events</span></div>
+        <div data-rv style="opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .18s,transform .8s cubic-bezier(.16,1,.3,1) .18s;border-top:1px solid rgba(var(--line-rgb),.15);padding-top:16px"><b data-count="34" data-suffix="+" style="display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.03em;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums">34+</b><span style="display:block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)">Schools</span></div>
+        <div data-rv style="opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .26s,transform .8s cubic-bezier(.16,1,.3,1) .26s;border-top:1px solid rgba(var(--line-rgb),.15);padding-top:16px"><b data-count="400" data-suffix="+" style="display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.03em;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums">400+</b><span style="display:block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)">Participants</span></div>
+      </div>
+    </div>
+
+    <div data-scrollcue style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);pointer-events:none">Scroll
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;animation:xnudge 2.2s ease-in-out infinite"><path d="M8 3v10M4 9l4 4 4-4"></path></svg>
+    </div>
+  </section>
+
+  <div style="border-top:1px solid rgba(var(--line-rgb),.15);border-bottom:1px solid rgba(var(--line-rgb),.15);background:rgba(var(--surface-rgb),.6);overflow:hidden;padding:11px 0">
+    <div style="display:flex;width:max-content;animation:xmarquee 38s linear infinite">
+      <div style="display:flex;gap:38px;padding-right:38px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);white-space:nowrap">
+        <span style="color:var(--accent)">Fortune favors the bold</span><span style="color:var(--blue-soft)">34+ schools</span><span>400+ participants</span><span style="color:var(--up-soft)">Sponsorship open</span><span>Six events</span><span style="color:var(--accent)">Student-led charity fest</span><span>TISB, Bengaluru</span><span style="color:var(--blue-soft)">xavage26@tisb.ac.in</span>
+      </div>
+      <div style="display:flex;gap:38px;padding-right:38px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);white-space:nowrap">
+        <span style="color:var(--accent)">Fortune favors the bold</span><span style="color:var(--blue-soft)">34+ schools</span><span>400+ participants</span><span style="color:var(--up-soft)">Sponsorship open</span><span>Six events</span><span style="color:var(--accent)">Student-led charity fest</span><span>TISB, Bengaluru</span><span style="color:var(--blue-soft)">xavage26@tisb.ac.in</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about" style="padding:clamp(84px,12vw,150px) 0">
+    <div data-split style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px);display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,5vw,60px)">
+      <div data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">01 — About</span></div>
+      <div>
+        <h2 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;letter-spacing:-.028em;color:var(--ink)">India's largest student-led Economics and Business mega-fest.</h2>
+        <p data-rv style="opacity:0;transform:translateY(14px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .35s,transform .85s cubic-bezier(.16,1,.3,1) .35s;margin-top:20px;font-size:clamp(1.03rem,1.6vw,1.2rem);line-height:1.62;color:var(--ink-soft);max-width:60ch">XAVAGE brings ambitious students from leading schools across the country onto one floor for two days of pitching, negotiating, trading and defending ideas under pressure. It is run entirely by students, and it is run for a cause.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)"><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(var(--blue-rgb),.24),rgba(var(--glow-rgb),.24),transparent)"></div></div>
+
+  <section id="numbers" style="padding:clamp(84px,12vw,150px) 0">
+    <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
+      <div style="margin-bottom:clamp(44px,6vw,74px)">
+        <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">02 — By the numbers</span>
+        <h2 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;letter-spacing:-.028em;color:var(--ink);max-width:18ch">One fest, in four numbers.</h2>
+      </div>
+
+      <div style="display:grid;gap:clamp(56px,9vw,120px)">
+        <article data-num style="display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,5vw,74px);align-items:center">
+          <div>
+            <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--blue-soft)">01 — Reach</span>
+            <h3 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2.1rem,4.4vw,3.3rem);letter-spacing:-.035em;color:var(--ink);margin-bottom:12px;line-height:1.1">Schools</h3>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .14s,transform .85s cubic-bezier(.16,1,.3,1) .14s;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:22px">Delegations from across India</p>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .2s,transform .85s cubic-bezier(.16,1,.3,1) .2s;font-size:clamp(.98rem,1.4vw,1.1rem);line-height:1.62;color:var(--ink-soft);max-width:46ch">XAVAGE runs as an inter-school platform. Leading schools from around the country send teams to one campus for one day, which is why a result here carries weight outside your own corridor.</p>
+          </div>
+          <div data-par="30" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(4.6rem,14vw,12rem);line-height:.82;letter-spacing:-.055em;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;text-shadow:0 0 70px rgba(var(--blue-rgb),.45)"><b data-count="34" data-suffix="+" style="font-weight:400">34+</b><span style="display:block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);text-shadow:none">Schools</span></div>
+        </article>
+
+        <article data-num style="display:grid;grid-template-columns:.98fr 1.02fr;gap:clamp(28px,5vw,74px);align-items:center">
+          <div data-par="30" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(4.6rem,14vw,12rem);line-height:.82;letter-spacing:-.055em;color:var(--ink);font-variant-numeric:tabular-nums;text-shadow:0 0 70px rgba(var(--glow-rgb),.45)"><b data-count="400" data-suffix="+" style="font-weight:400">400+</b><span style="display:block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);text-shadow:none">Participants</span></div>
+          <div>
+            <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)">02 — Scale</span>
+            <h3 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2.1rem,4.4vw,3.3rem);letter-spacing:-.035em;color:var(--ink);margin-bottom:12px;line-height:1.1">Participants</h3>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .14s,transform .85s cubic-bezier(.16,1,.3,1) .14s;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:22px">On the floor at once</p>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .2s,transform .85s cubic-bezier(.16,1,.3,1) .2s;font-size:clamp(.98rem,1.4vw,1.1rem);line-height:1.62;color:var(--ink-soft);max-width:46ch">Students arrive from entrepreneurship, finance, law, marketing and strategy. No room ever holds one kind of thinker giving one kind of answer, and the judging reflects that.</p>
+          </div>
+        </article>
+
+        <article data-num style="display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,5vw,74px);align-items:center">
+          <div>
+            <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--gold)">03 — Range</span>
+            <h3 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2.1rem,4.4vw,3.3rem);letter-spacing:-.035em;color:var(--ink);margin-bottom:12px;line-height:1.1">Events</h3>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .14s,transform .85s cubic-bezier(.16,1,.3,1) .14s;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:22px">Inside a single day</p>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .2s,transform .85s cubic-bezier(.16,1,.3,1) .2s;font-size:clamp(.98rem,1.4vw,1.1rem);line-height:1.62;color:var(--ink-soft);max-width:46ch">Pitching, persuasion, negotiation, economic insight and live trading. Cases and market data are released on the morning itself, so nothing can be rehearsed the night before.</p>
+          </div>
+          <div data-par="30" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(4.6rem,14vw,12rem);line-height:.82;letter-spacing:-.055em;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;text-shadow:0 0 70px rgba(var(--gold-rgb),.45)"><b data-count="6" style="font-weight:400">6</b><span style="display:block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);text-shadow:none">Events</span></div>
+        </article>
+
+        <article data-num style="display:grid;grid-template-columns:.98fr 1.02fr;gap:clamp(28px,5vw,74px);align-items:center">
+          <div data-par="30" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(4.6rem,14vw,12rem);line-height:.82;letter-spacing:-.055em;color:var(--ink);font-variant-numeric:tabular-nums;text-shadow:0 0 70px rgba(var(--up-rgb),.45)"><b data-count="100" data-suffix="%" style="font-weight:400">100%</b><span style="display:block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);text-shadow:none">Student-run</span></div>
+          <div>
+            <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--up-soft)">04 — Purpose</span>
+            <h3 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2.1rem,4.4vw,3.3rem);letter-spacing:-.035em;color:var(--ink);margin-bottom:12px;line-height:1.1">Student-run</h3>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .14s,transform .85s cubic-bezier(.16,1,.3,1) .14s;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:22px">And run for a cause</p>
+            <p data-rv style="opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .2s,transform .85s cubic-bezier(.16,1,.3,1) .2s;font-size:clamp(.98rem,1.4vw,1.1rem);line-height:1.62;color:var(--ink-soft);max-width:46ch">Every edition is organised end to end by students. Past years have contributed toward healthcare initiatives and wildlife conservation — the competition is the method, the cause is the point.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)"><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(var(--blue-rgb),.24),rgba(var(--glow-rgb),.24),transparent)"></div></div>
+
+  <section id="schedule" style="padding:clamp(84px,12vw,150px) 0">
+    <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
+      <div style="margin-bottom:clamp(36px,5vw,56px);max-width:60ch">
+        <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">03 — Schedule</span>
+        <h2 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;letter-spacing:-.028em;color:var(--ink)">The order of play.</h2>
+        <p data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .3s,transform .8s cubic-bezier(.16,1,.3,1) .3s;margin-top:16px;color:var(--muted)">Provisional. Final timings are confirmed in the delegate handbook once dates are announced.</p>
+      </div>
+
+      <div style="border:1px dashed rgba(var(--line-rgb),.3);border-radius:12px;background:var(--surface);padding:clamp(48px,7vw,72px) clamp(24px,4vw,40px);text-align:center">
+        <span style="display:inline-flex;align-items:center;gap:7px;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--accent)"><i style="width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor"></i>Will reveal soon</span>
+        <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.6rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px">The running order is still being finalized.</h3>
+        <p style="font-size:14.5px;color:var(--muted);max-width:48ch;margin:0 auto">Timings, rooms and the full day's flow drop closer to 28th October.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)"><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(var(--blue-rgb),.24),rgba(var(--glow-rgb),.24),transparent)"></div></div>
+
+  <section id="more" style="padding:clamp(84px,12vw,150px) 0">
+    <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
+      <div style="margin-bottom:clamp(36px,5vw,56px)">
+        <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">04 — Where next</span>
+        <h2 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;letter-spacing:-.028em;color:var(--ink)">Two rooms worth walking into.</h2>
+      </div>
+      <div data-jump style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <a data-rv data-par="12" href="Events.html" style="opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,36px);border:1px solid rgba(var(--line-rgb),.15);border-radius:12px;background:var(--surface);color:var(--ink-soft)">
+          <b style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.7rem;letter-spacing:-.02em;color:var(--ink)">The six events</b>
+          <span style="font-size:14.5px;color:var(--muted);line-height:1.6">Trojan's Tank, Ready Set Sell, The Courting, Deal No Deal, Capital Carnage and the Stock Investment Simulation — plus a market you can trade for yourself.</span>
+          <em style="font-style:normal;margin-top:6px;display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--accent)">Open the floor <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></em>
+        </a>
+        <a data-rv data-par="-12" href="OurSponsors.html" style="opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .08s,transform .85s cubic-bezier(.16,1,.3,1) .08s;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,36px);border:1px solid rgba(var(--line-rgb),.15);border-radius:12px;background:var(--surface);color:var(--ink-soft)">
+          <b style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.7rem;letter-spacing:-.02em;color:var(--ink)">Our sponsors</b>
+          <span style="font-size:14.5px;color:var(--muted);line-height:1.6">The organisations backing XAVAGE 26' — logos, partners, and what they make possible for the fest.</span>
+          <em style="font-style:normal;margin-top:6px;display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--accent)">Meet our sponsors <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></em>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)"><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(var(--blue-rgb),.24),rgba(var(--glow-rgb),.24),transparent)"></div></div>
+
+  <section id="faq" style="padding:clamp(84px,12vw,150px) 0">
+    <div data-split style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px);display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,5vw,60px)">
+      <div data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">05 — FAQ</span></div>
+      <div style="display:grid">
+        <details data-rv open style="opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);border-top:1px solid rgba(var(--line-rgb),.15);padding:18px 0">
+          <summary style="cursor:pointer;list-style:none;font-size:1.05rem;color:var(--ink)">Who takes part?</summary>
+          <p style="margin-top:12px;color:var(--muted);max-width:62ch">Students from schools across India. XAVAGE runs as an inter-school platform and past editions have drawn more than 34 schools and over 400 participants.</p>
+        </details>
+        <details data-rv style="opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .05s,transform .8s cubic-bezier(.16,1,.3,1) .05s;border-top:1px solid rgba(var(--line-rgb),.15);padding:18px 0">
+          <summary style="cursor:pointer;list-style:none;font-size:1.05rem;color:var(--ink)">How does a school register?</summary>
+          <p style="margin-top:12px;color:var(--muted);max-width:62ch">Write to the organising committee at xavage26@tisb.ac.in and your school will be sent the registration form along with event allocations.</p>
+        </details>
+        <details data-rv style="opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .1s,transform .8s cubic-bezier(.16,1,.3,1) .1s;border-top:1px solid rgba(var(--line-rgb),.15);padding:18px 0">
+          <summary style="cursor:pointer;list-style:none;font-size:1.05rem;color:var(--ink)">Where does the money go?</summary>
+          <p style="margin-top:12px;color:var(--muted);max-width:62ch">XAVAGE is a charity fest. Past editions have supported causes including healthcare initiatives and wildlife conservation, and the cause for the current edition is announced at the closing ceremony.</p>
+        </details>
+        <details data-rv style="opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .15s,transform .8s cubic-bezier(.16,1,.3,1) .15s;border-top:1px solid rgba(var(--line-rgb),.15);padding:18px 0">
+          <summary style="cursor:pointer;list-style:none;font-size:1.05rem;color:var(--ink)">How do we sponsor?</summary>
+          <p style="margin-top:12px;color:var(--muted);max-width:62ch">Write to the organising committee at xavage26@tisb.ac.in and they'll walk you through partnering with XAVAGE 26'. Current sponsors are listed on the <a href="OurSponsors.html">Our Sponsors</a> page.</p>
+        </details>
+        <details data-rv style="opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .2s,transform .8s cubic-bezier(.16,1,.3,1) .2s;border-top:1px solid rgba(var(--line-rgb),.15);border-bottom:1px solid rgba(var(--line-rgb),.15);padding:18px 0">
+          <summary style="cursor:pointer;list-style:none;font-size:1.05rem;color:var(--ink)">Where is it held?</summary>
+          <p style="margin-top:12px;color:var(--muted);max-width:62ch">On campus at The International School Bangalore. Dates for this edition are announced closer to the fest.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="position:relative;text-align:center;padding:clamp(96px,13vw,150px) 0;overflow:hidden">
+    <div style="position:absolute;left:50%;bottom:-46%;width:min(920px,120vw);height:110%;transform:translateX(-50%);pointer-events:none;background:radial-gradient(ellipse at 50% 100%,rgba(var(--glow-rgb),.2),rgba(var(--blue-deep-rgb),.09) 42%,transparent 68%)"></div>
+    <div style="position:relative;z-index:1;width:100%;max-width:840px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
+      <span data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:block;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">Get in touch</span>
+      <h2 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;letter-spacing:-.028em;color:var(--ink);max-width:17ch;margin:18px auto 20px;text-shadow:0 0 40px rgba(var(--glow-rgb),.32)">Back the students who will be running the market soon enough.</h2>
+      <p data-rv style="opacity:0;transform:translateY(14px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .3s,transform .85s cubic-bezier(.16,1,.3,1) .3s;font-size:clamp(1.03rem,1.7vw,1.2rem);line-height:1.62;color:var(--muted);margin:0 auto;max-width:62ch">Talk to the organising committee about partnerships, on-ground branding, or anything else.</p>
+      <div data-rv style="opacity:0;transform:translateY(14px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .4s,transform .85s cubic-bezier(.16,1,.3,1) .4s;display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;justify-content:center">
+        <a href="mailto:xavage26@tisb.ac.in?subject=XAVAGE%2026%27%20sponsorship" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid var(--ink);background:var(--ink);color:var(--canvas)">xavage26@tisb.ac.in
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+        </a>
+        <a href="https://www.xavage26.tisb.org" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">xavage26.tisb.org</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer style="border-top:1px solid rgba(var(--line-rgb),.15);background:var(--canvas-deep);padding:56px 0 40px;position:relative;z-index:1">
+  <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
+    <div data-foot style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px">
+      <div>
+        <div style="display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);margin-bottom:12px;text-shadow:0 0 22px rgba(var(--glow-rgb),.5)">Xavage <em style="font-style:normal;color:var(--accent)">26'</em></div>
+        <p style="font-size:14px;color:var(--muted);max-width:34ch">India's largest student-led Economics and Business mega-fest. Hosted by The International School Bangalore.</p>
+      </div>
+      <div>
+        <h4 style="font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-weight:400;margin-bottom:14px">Fest</h4>
+        <ul style="list-style:none;display:grid;gap:9px">
+          <li><a href="#about" style="font-size:14px;color:var(--muted)">About</a></li>
+          <li><a href="Events.html" style="font-size:14px;color:var(--muted)">Events</a></li>
+          <li><a href="#schedule" style="font-size:14px;color:var(--muted)">Schedule</a></li>
+          <li><a href="OurSponsors.html" style="font-size:14px;color:var(--muted)">Our Sponsors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-weight:400;margin-bottom:14px">Contact</h4>
+        <ul style="list-style:none;display:grid;gap:9px">
+          <li><a href="mailto:xavage26@tisb.ac.in" style="font-size:14px;color:var(--muted)">xavage26@tisb.ac.in</a></li>
+          <li><a href="https://www.xavage26.tisb.org" style="font-size:14px;color:var(--muted)">xavage26.tisb.org</a></li>
+          <li style="font-size:14px;color:var(--muted)">TISB Campus, Bengaluru</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:48px;padding-top:22px;border-top:1px solid rgba(var(--line-rgb),.15);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">
+      <span>XAVAGE 26' — Organizing Committee, TISB</span>
+      <span>Fortune favors the bold</span>
+    </div>
+  </div>
+</footer>
+
+<script src="./xavage-scroll.js"></script>
+<script src="./xavage-theme.js"></script>
+<script>
+  window.XavageScroll.start({ stagger: 160, scale: 1 });
+  window.XavageTheme.initTheme();
+  document.querySelectorAll('[data-nav]').forEach(a => { if (a.dataset.nav === 'home') a.style.color = 'var(--ink)'; });
+
+</script>
