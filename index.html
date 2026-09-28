@@ -1,4 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Xavage 26'</title>
+<meta name="description" content="XAVAGE 26' is India's largest student-led business and economics charity fest, hosted at The International School Bangalore on 28th October 2026. Six events, 34+ schools, 400+ participants.">
+<link rel="canonical" href="https://xavage.tisb.org/">
+<meta property="og:title" content="Xavage 26'">
+<meta property="og:description" content="XAVAGE 26' is India's largest student-led business and economics charity fest, hosted at The International School Bangalore on 28th October 2026. Six events, 34+ schools, 400+ participants.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xavage.tisb.org/">
+<meta property="og:image" content="https://xavage.tisb.org/assets/hero-bull.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Xavage 26'">
+<meta name="twitter:description" content="XAVAGE 26' is India's largest student-led business and economics charity fest, hosted at The International School Bangalore on 28th October 2026. Six events, 34+ schools, 400+ participants.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,7 +32,13 @@
   @keyframes xmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
   @media(max-width:900px){
-    [data-navlinks]{display:none!important}
+    [data-navtoggle-btn]{display:flex!important}
+    [data-navlinks]{position:absolute;left:0;right:0;top:100%;flex-direction:column!important;align-items:stretch!important;gap:0!important;background:var(--canvas);border-bottom:1px solid rgba(var(--line-rgb),.15);max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;padding:0 clamp(20px,5vw,40px)}
+    [data-navlinks] a{display:block;padding:13px 0!important;font-size:15px!important;border-top:1px solid rgba(var(--line-rgb),.1)}
+    [data-navlinks] a:first-child{border-top:none}
+    #navtoggle:checked ~ [data-navlinks]{max-height:400px;opacity:1;pointer-events:auto;padding-bottom:14px}
+    #navtoggle:checked ~ [data-navcta] [data-icon-open]{display:none!important}
+    #navtoggle:checked ~ [data-navcta] [data-icon-close]{display:block!important}
     [data-navcta] a{padding:8px 12px!important;font-size:12px!important}
     [data-split]{grid-template-columns:1fr!important;gap:14px!important}
     [data-num]{grid-template-columns:1fr!important;gap:20px!important}
@@ -85,6 +106,8 @@
   [data-theme="bear"] [data-rays] g[filter="url(#xMid)"] path{stroke:#FCA5A5}
   [data-theme="bear"] [data-rays] g[filter="url(#xLow)"] path{stroke:#FEE2E2}
 </style>
+</head>
+<body>
 
 <div style="position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(130% 58% at 50% -10%,rgba(var(--line-rgb),.20),transparent 60%),linear-gradient(180deg,rgba(var(--line-rgb),.08) 0%,rgba(var(--line-rgb),.022) 36%,rgba(0,0,0,0) 64%)"></div>
 <div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden">
@@ -96,7 +119,13 @@
 
 <header style="position:sticky;top:0;z-index:40;background:rgba(var(--canvas-rgb),.74);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border-bottom:1px solid rgba(var(--line-rgb),.15);transform:translateY(0);transition:transform .35s cubic-bezier(.16,1,.3,1);will-change:transform">
   <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px);display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:20px;flex-wrap:wrap">
-    <a href="#" style="display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);text-shadow:0 0 22px rgba(var(--glow-rgb),.5)">Xavage <em style="font-style:normal;color:var(--accent);text-shadow:0 0 18px rgba(var(--glow-rgb),.6)">26'</em></a>
+    <div style="display:flex;align-items:center;gap:10px;min-width:0">
+      <a href="https://www.tisb.org/" target="_blank" rel="noopener" aria-label="The International School Bangalore" style="display:flex;align-items:center;flex:none">
+        <img src="./assets/tisb-logo.png" alt="TISB" style="height:32px;width:32px;object-fit:contain;display:block">
+      </a>
+      <a href="#" style="display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);text-shadow:0 0 22px rgba(var(--glow-rgb),.5)">Xavage <em style="font-style:normal;color:var(--accent);text-shadow:0 0 18px rgba(var(--glow-rgb),.6)">26'</em></a>
+    </div>
+        <input type="checkbox" id="navtoggle" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none">
     <nav data-navlinks style="display:flex;align-items:center;gap:26px">
       <a data-nav="home" href="#about" style="font-size:13.5px;color:var(--muted)">About</a>
       <a data-nav="events" href="Events.html#events" style="font-size:13.5px;color:var(--muted)">Events</a>
@@ -107,6 +136,11 @@
     </nav>
     <div data-navcta style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end">
       <a href="Events.html#events" style="display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;padding:9px 15px;border-radius:5px;border:1px solid var(--accent);background:transparent;color:var(--accent);white-space:nowrap">Register</a>
+      <label for="navtoggle" data-navtoggle-btn aria-label="Menu" style="display:none;cursor:pointer;padding:8px;margin:-8px 0 -8px -4px;align-items:center;justify-content:center;color:var(--ink)">
+        <svg data-icon-open viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+        <svg data-icon-close viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </label>
+    
     </div>
   </div>
   <div style="position:absolute;left:0;right:0;bottom:-1px;height:1px;overflow:hidden">
@@ -199,7 +233,7 @@
       <div data-rv style="opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);opacity:.75">01 — About</span></div>
       <div>
         <h2 data-words style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;letter-spacing:-.028em;color:var(--ink)">India's largest student-led Economics and Business mega-fest.</h2>
-        <p data-rv style="opacity:0;transform:translateY(14px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .35s,transform .85s cubic-bezier(.16,1,.3,1) .35s;margin-top:20px;font-size:clamp(1.03rem,1.6vw,1.2rem);line-height:1.62;color:var(--ink-soft);max-width:60ch">XAVAGE brings ambitious students from leading schools across the country onto one floor for two days of pitching, negotiating, trading and defending ideas under pressure. It is run entirely by students, and it is run for a cause.</p>
+        <p data-rv style="opacity:0;transform:translateY(14px);transition:opacity .85s cubic-bezier(.16,1,.3,1) .35s,transform .85s cubic-bezier(.16,1,.3,1) .35s;margin-top:20px;font-size:clamp(1.03rem,1.6vw,1.2rem);line-height:1.62;color:var(--ink-soft);max-width:60ch">XAVAGE brings ambitious students from leading schools across the country onto one floor for a day of pitching, negotiating, trading and defending ideas under pressure. It is run entirely by students, and it is run for a cause.</p>
       </div>
     </div>
   </section>
@@ -338,7 +372,11 @@
         <a href="mailto:xavage26@tisb.ac.in?subject=XAVAGE%2026%27%20sponsorship" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid var(--ink);background:var(--ink);color:var(--canvas)">xavage26@tisb.ac.in
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
         </a>
-        <a href="https://www.xavage26.tisb.org" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">xavage26.tisb.org</a>
+        <a href="https://www.xavage.tisb.org" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">xavage.tisb.org</a>
+        <a href="https://www.tisb.org/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">The International School Bangalore</a>
+        <a href="https://www.google.com/maps/place/TISB+Main+Academic+Building,+THE+INTERNATIONAL+SCHOOL,+Hegondanahalli,+Thigala+Chowdadenahalli,+Karnataka+562125,+India/@12.8915845,77.7477743,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae0d56c841e477:0xf61ac39217ecf789!8m2!3d12.8915845!4d77.7503492!16s%2Fg%2F12hlrxb5g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">Get directions
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M8 1.5c-2.5 0-4.5 2-4.5 4.5 0 3.5 4.5 8.5 4.5 8.5s4.5-5 4.5-8.5c0-2.5-2-4.5-4.5-4.5z"></path><circle cx="8" cy="6" r="1.6"></circle></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -349,8 +387,13 @@
   <div style="width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)">
     <div data-foot style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px">
       <div>
-        <div style="display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);margin-bottom:12px;text-shadow:0 0 22px rgba(var(--glow-rgb),.5)">Xavage <em style="font-style:normal;color:var(--accent)">26'</em></div>
-        <p style="font-size:14px;color:var(--muted);max-width:34ch">India's largest student-led Economics and Business mega-fest. Hosted by The International School Bangalore.</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <a href="https://www.tisb.org/" target="_blank" rel="noopener" aria-label="The International School Bangalore" style="display:flex;align-items:center;flex:none">
+            <img src="./assets/tisb-logo.png" alt="TISB" style="height:32px;width:32px;object-fit:contain;display:block">
+          </a>
+          <div style="display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);text-shadow:0 0 22px rgba(var(--glow-rgb),.5)">Xavage <em style="font-style:normal;color:var(--accent)">26'</em></div>
+        </div>
+        <p style="font-size:14px;color:var(--muted);max-width:34ch">India's largest student-led Economics and Business mega-fest. Hosted by <a href="https://www.tisb.org/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">The International School Bangalore</a>.</p>
       </div>
       <div>
         <h4 style="font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-weight:400;margin-bottom:14px">Fest</h4>
@@ -366,8 +409,9 @@
         <h4 style="font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-weight:400;margin-bottom:14px">Contact</h4>
         <ul style="list-style:none;display:grid;gap:9px">
           <li><a href="mailto:xavage26@tisb.ac.in" style="font-size:14px;color:var(--muted)">xavage26@tisb.ac.in</a></li>
-          <li><a href="https://www.xavage26.tisb.org" style="font-size:14px;color:var(--muted)">xavage26.tisb.org</a></li>
-          <li style="font-size:14px;color:var(--muted)">TISB Campus, Bengaluru</li>
+          <li><a href="https://www.xavage.tisb.org" style="font-size:14px;color:var(--muted)">xavage.tisb.org</a></li>
+          <li><a href="https://www.tisb.org/" target="_blank" rel="noopener" style="font-size:14px;color:var(--muted)">tisb.org</a></li>
+          <li><a href="https://www.google.com/maps/place/TISB+Main+Academic+Building,+THE+INTERNATIONAL+SCHOOL,+Hegondanahalli,+Thigala+Chowdadenahalli,+Karnataka+562125,+India/@12.8915845,77.7477743,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae0d56c841e477:0xf61ac39217ecf789!8m2!3d12.8915845!4d77.7503492!16s%2Fg%2F12hlrxb5g" target="_blank" rel="noopener" style="font-size:14px;color:var(--muted)">TISB Campus, Bengaluru</a></li>
         </ul>
       </div>
     </div>
@@ -386,3 +430,5 @@
   document.querySelectorAll('[data-nav]').forEach(a => { if (a.dataset.nav === 'home') a.style.color = 'var(--ink)'; });
 
 </script>
+</body>
+</html>
