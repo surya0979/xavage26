@@ -14,12 +14,45 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Xavage 26'">
 <meta name="twitter:description" content="XAVAGE 26' is India's largest student-led business and economics charity fest, hosted at The International School Bangalore on 28th October 2026. Six events, 34+ schools, 400+ participants.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "XAVAGE 26'",
+  "description": "India's largest student-led business and economics charity fest, hosted at The International School Bangalore.",
+  "startDate": "2026-10-28",
+  "endDate": "2026-10-28",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "url": "https://xavage.tisb.org/",
+  "image": "https://xavage.tisb.org/assets/hero-bull.png",
+  "location": {
+    "@type": "Place",
+    "name": "The International School Bangalore",
+    "hasMap": "https://maps.app.goo.gl/32quVehnoMhp3Juw9",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "NAFL Valley, Whitefield - Sarjapur Road, Near Dommasandra Circle",
+      "addressLocality": "Bangalore",
+      "addressRegion": "Karnataka",
+      "postalCode": "562125",
+      "addressCountry": "IN"
+    }
+  },
+  "organizer": {
+    "@type": "EducationalOrganization",
+    "name": "The International School Bangalore",
+    "url": "https://www.tisb.org/"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%;background:var(--canvas);scroll-behavior:smooth}
+  section[id]{scroll-margin-top:80px}
   body{background:var(--canvas);color:var(--ink-soft);font-family:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:var(--accent);text-decoration:none}
   a:hover{color:var(--ink)}
@@ -31,6 +64,7 @@
   @keyframes xnudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
   @keyframes xmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+  @media(max-width:1000px){[data-navlinks]{gap:18px!important}}
   @media(max-width:900px){
     [data-navtoggle-btn]{display:flex!important}
     [data-navlinks]{position:absolute;left:0;right:0;top:100%;flex-direction:column!important;align-items:stretch!important;gap:0!important;background:var(--canvas);border-bottom:1px solid rgba(var(--line-rgb),.15);max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;padding:0 clamp(20px,5vw,40px)}
@@ -133,6 +167,7 @@
       <a data-nav="sponsorship" href="OurSponsors.html" style="font-size:13.5px;color:var(--muted)">Our Sponsors</a>
       <a href="ImportantUpdates.html" style="font-size:13.5px;color:var(--muted)">Important Updates</a>
       <a data-nav="faq" href="#faq" style="font-size:13.5px;color:var(--muted)">FAQ</a>
+      <a data-nav="contact" href="#contact" style="font-size:13.5px;color:var(--muted)">Contact Us</a>
     </nav>
     <div data-navcta style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end">
       <a href="Events.html#events" style="display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;padding:9px 15px;border-radius:5px;border:1px solid var(--accent);background:transparent;color:var(--accent);white-space:nowrap">Register</a>
@@ -147,6 +182,11 @@
     <i data-prog style="display:block;height:100%;background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--accent-deep));box-shadow:0 0 10px rgba(var(--glow-rgb),.7);transform:scaleX(0);transform-origin:0 50%"></i>
   </div>
 </header>
+<script>
+  document.querySelectorAll('[data-navlinks] a').forEach(function (a) {
+    a.addEventListener('click', function () { var t = document.getElementById('navtoggle'); if (t) t.checked = false; });
+  });
+</script>
 
 <main style="position:relative;z-index:1">
 
@@ -374,10 +414,11 @@
         </a>
         <a href="https://www.xavage.tisb.org" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">xavage.tisb.org</a>
         <a href="https://www.tisb.org/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">The International School Bangalore</a>
-        <a href="https://www.google.com/maps/place/TISB+Main+Academic+Building,+THE+INTERNATIONAL+SCHOOL,+Hegondanahalli,+Thigala+Chowdadenahalli,+Karnataka+562125,+India/@12.8915845,77.7477743,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae0d56c841e477:0xf61ac39217ecf789!8m2!3d12.8915845!4d77.7503492!16s%2Fg%2F12hlrxb5g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:13px 21px;border-radius:5px;border:1px solid rgba(var(--line-rgb),.15);background:transparent;color:var(--ink)">Get directions
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M8 1.5c-2.5 0-4.5 2-4.5 4.5 0 3.5 4.5 8.5 4.5 8.5s4.5-5 4.5-8.5c0-2.5-2-4.5-4.5-4.5z"></path><circle cx="8" cy="6" r="1.6"></circle></svg>
-        </a>
       </div>
+      <address style="font-style:normal;margin:36px auto 0;max-width:52ch">
+        <span style="display:block;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)">Campus address</span>
+        <a href="https://maps.app.goo.gl/32quVehnoMhp3Juw9" target="_blank" rel="noopener" style="font-size:15.5px;line-height:1.65;color:var(--ink-soft);text-decoration:underline;text-decoration-color:rgba(var(--line-rgb),.45);text-underline-offset:4px">The International School Bangalore (TISB),<br>NAFL Valley, Whitefield - Sarjapur Road,<br>Near Dommasandra Circle, Bangalore - 562125, Karnataka, India</a>
+      </address>
     </div>
   </section>
 
@@ -411,7 +452,7 @@
           <li><a href="mailto:xavage26@tisb.ac.in" style="font-size:14px;color:var(--muted)">xavage26@tisb.ac.in</a></li>
           <li><a href="https://www.xavage.tisb.org" style="font-size:14px;color:var(--muted)">xavage.tisb.org</a></li>
           <li><a href="https://www.tisb.org/" target="_blank" rel="noopener" style="font-size:14px;color:var(--muted)">tisb.org</a></li>
-          <li><a href="https://www.google.com/maps/place/TISB+Main+Academic+Building,+THE+INTERNATIONAL+SCHOOL,+Hegondanahalli,+Thigala+Chowdadenahalli,+Karnataka+562125,+India/@12.8915845,77.7477743,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae0d56c841e477:0xf61ac39217ecf789!8m2!3d12.8915845!4d77.7503492!16s%2Fg%2F12hlrxb5g" target="_blank" rel="noopener" style="font-size:14px;color:var(--muted)">TISB Campus, Bengaluru</a></li>
+          <li><address style="font-style:normal"><a href="https://maps.app.goo.gl/32quVehnoMhp3Juw9" target="_blank" rel="noopener" style="font-size:14px;line-height:1.6;color:var(--muted)">The International School Bangalore (TISB), NAFL Valley, Whitefield - Sarjapur Road, Near Dommasandra Circle, Bangalore - 562125, Karnataka, India</a></address></li>
         </ul>
       </div>
     </div>
