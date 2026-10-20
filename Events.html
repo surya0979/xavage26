@@ -348,9 +348,9 @@
   </div>
 </footer>
 
-<script src="./xavage-scroll.js"></script>
-<script>
-  window.XavageScroll.start({ stagger: 70, scale: 1 });
+<script type="module">
+  import { start } from './xavage-scroll.js';
+  start({ stagger: 70, scale: 1 });
 
   const TICKS = 45;
   const START_CASH = 10000;

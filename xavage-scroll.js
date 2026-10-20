@@ -36,7 +36,7 @@ function splitWords(el, stagger) {
   el.appendChild(frag);
 }
 
-function start(opts = {}) {
+export function start(opts = {}) {
   const still = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   const stagger = opts.stagger ?? 70;
   const scale = opts.scale ?? 1;
@@ -187,4 +187,3 @@ function start(opts = {}) {
     }
   };
 }
-window.XavageScroll = { start };

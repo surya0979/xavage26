@@ -23,7 +23,7 @@ const store = (() => {
   }
 })();
 
-function initTheme() {
+export function initTheme() {
   if (window.__xavTheme) return window.__xavTheme;
   const root = document.documentElement;
 
@@ -115,4 +115,3 @@ function initTheme() {
   window.__xavTheme = { apply, unlock, relock };
   return window.__xavTheme;
 }
-window.XavageTheme = { initTheme };
